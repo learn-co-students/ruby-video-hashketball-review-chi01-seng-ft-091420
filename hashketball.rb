@@ -1,4 +1,5 @@
 # Write your code below game_hash
+require 'pry'
 
 def game_hash
   {
@@ -128,3 +129,65 @@ def game_hash
 end
 
 # Write code here
+def players_hash
+  players_hash = game_hash[:home][:players] + game_hash[:away][:players]
+end
+
+def num_points_scored(player_name) 
+  players_hash.each do |value| 
+    if value[:player_name] === player_name 
+      return value[:points]
+    end
+  end
+end
+
+def shoe_size(player_name) 
+  players_hash.each do |value| 
+    if value[:player_name] === player_name 
+      return value[:shoe]
+    end
+  end
+end
+
+def team_colors(team_name)
+  #binding.pry
+  if team_name === game_hash[:home][:team_name]
+    return game_hash[:home][:colors]
+  elsif team_name === game_hash[:away][:team_name]
+    return game_hash[:away][:colors]
+  else
+  end
+end
+
+def team_names
+  #if more than just away or home teams in the hash
+  teams_in_hash = game_hash.keys
+  teams_in_hash.map { |team| game_hash[team][:team_name] }
+  #or [game_hash[:home][:team_name], game_hash[:away][:team_name] if only home and away teams in hash
+end
+
+#assuming only 2 teams home and away
+def player_numbers(team_name)
+  if team_name === game_hash[:home][:team_name]
+    game_hash[:home][:players].map { |player| player[:number] }
+  else
+    game_hash[:away][:players].map { |player| player[:number] }
+  end
+end
+
+def player_stats(player_name)
+  players_hash.each do |value| 
+    if value[:player_name] === player_name 
+      return value
+    end
+  end
+end
+
+#returns hash of player with largest shoe size 
+def find_player_with_largest_shoes 
+  players_hash.max { |player1, player2| player1[:shoe] <=> player2[:shoe]}
+end
+
+def big_shoe_rebounds
+  find_player_with_largest_shoes[:rebounds]
+end

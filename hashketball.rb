@@ -127,4 +127,96 @@ def game_hash
   }
 end
 
-# Write code here
+
+
+
+def num_points_scored(player)
+game_hash[:home][:players].each do |v|
+  if v[:player_name] == player
+    return v[:points]
+  end
+end
+game_hash[:away][:players].each do |v|
+  if v[:player_name] == player
+    return v[:points]
+  end
+end
+end
+
+def shoe_size(player)
+  game_hash[:home][:players].each do |v|
+  if v[:player_name] == player
+    return v[:shoe]
+  end
+end
+game_hash[:away][:players].each do |v|
+  if v[:player_name] == player
+    return v[:shoe]
+  end
+end
+end
+
+def team_colors(team)
+if game_hash[:home][:team_name] == team
+  return game_hash[:home][:colors]
+end
+if game_hash[:away][:team_name] == team
+  return game_hash[:away][:colors]
+end
+end
+
+def team_names
+ home_team = game_hash[:home][:team_name]
+   away_team = game_hash[:away][:team_name]
+   p array1 = [home_team, away_team]
+end
+
+def player_stats(player)
+ game_hash[:home][:players].each do |v|
+  if v[:player_name] == player
+    return v
+  end
+end
+game_hash[:away][:players].each do |v|
+  if v[:player_name] == player
+    return v
+  end
+end
+end
+
+def player_numbers(team)
+  array1 = []
+  if game_hash[:home][:team_name] == team
+    game_hash[:home][:players].each do |v|
+      array1 << v[:number]
+    end
+  end
+  if game_hash[:away][:team_name] == team
+    game_hash[:away][:players].each do |v|
+      array1 << v[:number]
+    end
+  end
+   return array1
+end
+
+
+def big_shoe_rebounds
+  array1 = []
+    game_hash[:home][:players].each do |v|
+      array1 << v[:shoe]
+    end
+    game_hash[:away][:players].each do |v|
+      array1 << v[:shoe]
+    end
+   shoe_max = array1.max
+   game_hash[:home][:players].each do |v|
+     if v[:shoe] == shoe_max
+       return v[:rebounds]
+     end
+     end
+   game_hash[:away][:players].each do |v|
+       if v[:shoe] == shoe_max
+         return v[:rebounds]
+       end
+       end
+end

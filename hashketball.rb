@@ -127,4 +127,98 @@ def game_hash
   }
 end
 
-# Write code here
+def players
+  players_array = []
+  for i in game_hash[:home][:players]
+    players_array.push(i)
+  end
+  for i in game_hash[:away][:players]
+    players_array.push(i)
+  end 
+  return players_array
+end 
+
+def num_points_scored(p1)
+  players.each do |index|
+    if index[:player_name] == p1
+      return index[:points]
+    end
+  end
+end
+
+def shoe_size(p1)
+  players.each do |index|
+    if index[:player_name] == p1
+      return index[:shoe]
+    end
+  end
+end
+def player_stats(p1)
+  players.each do |index|
+    if index[:player_name] == p1
+      return index
+    end
+  end
+end
+
+def big_shoe_rebounds
+  shoe_size_array = []
+  players.each do |index|
+    shoe_size_array << index[:shoe]
+  end
+  biggest_shoe = shoe_size_array[0]
+  for i in shoe_size_array
+    if i > biggest_shoe
+      biggest_shoe = i
+    end
+  end
+  player_rebound = ""
+  players.each do |index|
+    if index[:shoe] == biggest_shoe
+      player_rebound = index[:player_name]
+    end
+  end
+  players.each do |index|
+    if index[:player_name] == player_rebound
+      return index[:rebounds]
+    end
+  end
+end 
+
+def player_numbers(name_of_team)
+  jersey_numbers = []
+  players_array = []
+  if name_of_team == game_hash[:home][:team_name]
+    for i in game_hash[:home][:players]
+      players_array.push(i)
+    end
+  else
+    for i in game_hash[:away][:players]
+      players_array.push(i)
+    end
+  end
+  players_array.each do |index|
+    jersey_numbers.push(index[:number])
+  end
+  return jersey_numbers
+end 
+
+def team_colors(name_of_team)
+  team_colors_array = []
+  if name_of_team == game_hash[:home][:team_name]
+    for i in game_hash[:home][:colors]
+      team_colors_array.push(i)
+    end
+  else
+    for i in game_hash[:away][:colors]
+      team_colors_array.push(i)
+    end
+  end
+  return team_colors_array
+end
+
+def team_names
+  team_name_array = []
+  team_name_array.push(game_hash[:home][:team_name], game_hash[:away][:team_name])
+  return team_name_array
+end 

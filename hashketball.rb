@@ -126,5 +126,15 @@ def game_hash
     }
   }
 end
+ 
+ def num_points_scored player_name
+num_points_scored = game_hash[:home][:players], (game_hash[:away][:players])
+num_points_scored[:player_name][:points]
+end
 
-# Write code here
+   
+
+
+
+
+
